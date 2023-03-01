@@ -1,0 +1,6 @@
+{
+  "appId": "com.drops.app",
+  "appName": "drops",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
