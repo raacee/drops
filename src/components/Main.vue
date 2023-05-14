@@ -1,5 +1,5 @@
 <template>
-  <component :is=this.view />
+  <component :is=this.view @createAccount="accountCreated"/>
 </template>
 
 
@@ -13,11 +13,20 @@ export default {
     data(){
         return {
             profileData:{},
-            view: 'FirstTime'
+            view: 'App'
+        }
+    },
+    methods:{
+        accountCreated(profileData){
+            profileData.userHeight = parseInt(profileData.userHeight)
+            profileData.userWeight = parseInt(profileData.userWeight)
+            profileData.physicalActivity = parseInt(profileData.physicalActivity)
+            localStorage.setItem('profile_data',JSON.stringify(profileData))
+            this.view = 'App'
         }
     },
     beforeMount() {
-        const profileData = localStorage.getItem('profile')
+        const profileData = localStorage.getItem('profile_data')
         if(profileData){
             this.profileData = profileData
         }
