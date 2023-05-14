@@ -12,11 +12,11 @@
                     <p>Gender :</p>
                     <div style="display: flex; justify-content: center; align-items: center">
                         <div>
-                            <input type="radio" id="one" value="Male" v-model="profileData.userGender" style=""/>
+                            <input type="radio" id="one" value="Male" v-model="this.profileData.userGender" style=""/>
                             <label for="one" style="color:white;">Male</label>
                         </div>
                         <div>
-                            <input type="radio" id="two" value="Female" v-model="profileData.userGender" />
+                            <input type="radio" id="two" value="Female" v-model="this.profileData.userGender" />
                             <label for="two" style="color:white;">Female</label>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div>
-                <button @click.prevent="this.$emit('createAccount', this.profileData)">
+                <button @click.prevent=emitCreateAccount>
                     Create profile
                 </button>
             </div>
@@ -86,7 +86,24 @@ export default {
             input.value = this.profileData.userAge
         },
         emitCreateAccount(){
-
+            console.log(this.profileData)
+            if(!this.profileData.userGender || this.profileData.userGender === ""){
+                window.alert("Please choose a gender")
+                return;
+            }
+            if(!this.profileData.userAge || this.profileData.userAge === 0){
+                window.alert("Please choose a gender")
+                return;
+            }
+            if(!this.profileData.userName || this.profileData.userName === ""){
+                window.alert("Please enter your name")
+                return;
+            }
+            this.profileData.userHeight = parseInt(this.profileData.userHeight)
+            this.profileData.userWeight = parseInt(this.profileData.userWeight)
+            this.profileData.userPhysicalActivity = parseInt(this.profileData.userPhysicalActivity)
+            this.profileData.userAge = parseInt(this.profileData.userAge)
+            this.$emit('createAccount', this.profileData)
         }
     }
 }

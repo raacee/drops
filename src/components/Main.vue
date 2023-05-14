@@ -1,5 +1,5 @@
 <template>
-  <component :is=this.view @createAccount="accountCreated"/>
+  <component :is=this.view @createAccount="accountCreated" :profileData="this.profileData"/>
 </template>
 
 
@@ -18,9 +18,7 @@ export default {
     },
     methods:{
         accountCreated(profileData){
-            profileData.userHeight = parseInt(profileData.userHeight)
-            profileData.userWeight = parseInt(profileData.userWeight)
-            profileData.physicalActivity = parseInt(profileData.physicalActivity)
+            this.profileData = profileData
             localStorage.setItem('profile_data',JSON.stringify(profileData))
             this.view = 'App'
         }
@@ -28,7 +26,7 @@ export default {
     beforeMount() {
         const profileData = localStorage.getItem('profile_data')
         if(profileData){
-            this.profileData = profileData
+            this.profileData = JSON.parse(profileData)
         }
         else{
             this.view = 'FirstTime'

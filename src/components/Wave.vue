@@ -47,9 +47,6 @@ export default {
                       blueInitial - (blueInitial - blueFinal) * this.volumePercentage
                     ].join(',')
         }
-    },
-    mounted(){
-        console.log(this.color)
     }
 
 }

@@ -15,9 +15,10 @@
         </div>
         <div style="margin-bottom:30px;">
             <input class="liters-input" @input="inputNumberAbs" v-model="volumeInputText">
+            <span style="color:white; margin-left:10px; font-size: 20px"> mL </span>
         </div>
         <div>
-            <button class="add-water-button" style="">
+            <button class="add-water-button" @click.prevent="addDrink">
                 +
             </button>
         </div>
@@ -44,7 +45,10 @@ export default {
     components: {Wave},
     computed:{
         volumeInputNumber(){
-            return parseInt(this.volumeInputText)
+            if(this.volumeInputText[0]==='.'){
+                this.volumeInputText = '0' + this.volumeInputText
+            }
+            return parseFloat(this.volumeInputText)
         },
         volumePercentage(){
             return this.totalVolume/this.volumeObjective
@@ -82,20 +86,29 @@ export default {
             const input = document.getElementsByTagName("input")[0];
             this.volumeInputText = this.volumeInputText.replace(/^0+|[^\d.]/g, '');
             input.value = this.volumeInputText
+        },
+        addDrink(){
+            this.totalVolume = Math.round((this.totalVolume + (this.volumeInputNumber / 1000))*1000)/1000
+            localStorage.setItem('totalVolume', this.totalVolume)
         }
     },
     beforeMount() {
         const genderDict = {
             'Male' : function(weight, height, physicalActivity, age){
-                return 3 + physicalActivity*0.5 + 0.25*age
+                return 3 + physicalActivity*0.15 + 0.05*age
             },
             'Female' : function(weight, height, physicalActivity, age){
-                return 2 + physicalActivity*0.5 + 0.25*age
+                return 2 + physicalActivity*0.15 + 0.05*age
             }
         }
         const estimateObjective = genderDict[this.profileData.userGender]
         const {userWeight, userHeight, userPhysicalActivity, userAge} = this.profileData
         this.volumeObjective = estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)
+
+        const total = localStorage.getItem('totalVolume')
+        if(total){
+            this.totalVolume = total
+        }
     }
 }
 
