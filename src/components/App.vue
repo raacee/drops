@@ -36,6 +36,8 @@
 import Wave from "./Wave.vue";
 
 export default {
+    name:'App',
+    props:['profileData'],
     components: {Wave},
     computed:{
         volumeInputNumber(){
@@ -79,9 +81,6 @@ export default {
             this.volumeInputText = this.volumeInputText.replace(/^0+|[^\d.]/g, '');
             input.value = input.value.replace(/^0+|[^\d.]/g, '');
         }
-    },
-    beforeMount() {
-        const objective = localStorage.getItem('')
     }
 }
 
@@ -164,17 +163,4 @@ export default {
     cursor: pointer;
 }
 
-html {
-    height: 100%;
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    background: rgb(32, 230, 233);
-    background: linear-gradient(0deg, rgba(19, 58, 80) 0%, rgb(14, 180, 255) 100%);
-    background-repeat: no-repeat;
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    margin: 0;
-}
 </style>
