@@ -2,9 +2,10 @@
 
 </template>
 
+
 <script>
 export default {
-    name: "FirstTime"
+    name: "Main"
 }
 </script>
 
