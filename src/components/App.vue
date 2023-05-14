@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="control">
             <p style="font-size:25px;">
-                Welcome back <br><br> Today you have drank {{volume}} liters of water
+                Welcome back <br><br> Today you have drank {{ totalVolume }} liters of water
             </p>
         </div>
         <div style="color:white">
@@ -42,7 +42,7 @@ export default {
             return parseInt(this.volumeInputText)
         },
         volumePercentage(){
-            return this.volume/this.volumeObjective
+            return this.totalVolume/this.volumeObjective
         },
         bottomOffset(){
             return this.volumePercentage * 850
@@ -67,7 +67,7 @@ export default {
     data() {
         return {
             volumeInputText:0,
-            volume: 2.7,
+            totalVolume: 2.7,
             volumeObjective:2.7,
             bottomWave: 0,
             bottomVolume: 0
