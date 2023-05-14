@@ -1,28 +1,53 @@
 <template>
     <div class="fullscreen">
-        <div style="margin-bottom:50px;">
-            <h2>Welcome to drops 💧 ! </h2>
-            <div style="display: flex; justify-content: center">
-                <span> Please enter your information : </span>
+        <div style="display:flex; justify-content: center; flex-direction: column; align-items: center; min-width: 25%">
+            <div style="margin-bottom:10px;">
+                <h2>Welcome to drops 💧 ! </h2>
+                <div style="display: flex; justify-content: center">
+                    <span> Please enter your information : </span>
+                </div>
             </div>
-        </div>
-        <div style="display: flex; justify-content: center; flex-direction: column; margin:20px;">
-            <div>
-                <p>Name :</p>
-                <input type="text" v-model="userName">
+            <div style="display: flex; justify-content: center; flex-direction: column; margin:20px;">
+                <div class="input-section">
+                    <p>Gender :</p>
+                    <div style="display: flex; justify-content: center; align-items: center">
+                        <div>
+                            <input type="radio" id="one" value="Male" v-model="profileData.userGender" style=""/>
+                            <label for="one" style="color:white;">Male</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="two" value="Female" v-model="profileData.userGender" />
+                            <label for="two" style="color:white;">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-section">
+                    <span>Name :</span>
+                    <input type="text" v-model="profileData.userName" class="text-input" style="width:45%">
+                </div>
+                <div class="input-section">
+                    <span>Age :</span>
+                    <input type="text" v-model="profileData.userAge" @input="inputNumberAbsAge" class="text-input">
+                </div>
+                <div class="input-section">
+                    <span>Weight (in kg) :</span>
+                    <input type="text" v-model="profileData.userWeight" @input="inputNumberAbsWeight" class="text-input">
+                </div>
+                <div class="input-section">
+                    <span>Height (in cm) :</span>
+                    <input type="text" max="200" min="100" v-model="profileData.userHeight" @input="inputNumberAbsHeight" class="text-input">
+                </div>
+                <div class="input-section">
+                    <p>Physical activity (hours of physical activity per week) </p>
+                    <input type="range" max="35" min="0" step="1" v-model="this.profileData.userPhysicalActivity" id="slider">
+                    <p style="margin-left:10px;">
+                        {{this.profileData.userPhysicalActivity}} hours</p>
+                </div>
             </div>
             <div>
-                <p>Weight :</p>
-                <input type="text" v-model="userWeight">
-            </div>
-            <div>
-                <p>Height:</p>
-                <input type="text" v-model="userHeight">
-            </div>
-            <div>
-                <p>Physical activity (hours of physical activity per week) </p>
-                <input type="range" max="35" min="0" step="1"  v-model="activitySliderValue" id="slider">
-                <p :style="'transform:translateX('+(this.activitySliderValue / 35 * 100 )+'%);'">{{ activitySliderValue }} hours</p>
+                <button @click.prevent="this.$emit('createAccount', this.profileData)">
+                    Create profile
+                </button>
             </div>
         </div>
     </div>
@@ -31,26 +56,93 @@
 <script>
 export default {
     name: "FirstTime",
+    emits:['createAccount'],
     data(){
         return{
-            userName:"",
-            userWeight:"",
-            userHeight:"",
-            activitySliderValue:0
+            profileData : {
+                userGender:"",
+                userName: "",
+                userWeight: 70,
+                userHeight: 100,
+                userPhysicalActivity : 0,
+                userAge:0
+            }
         }
     },
+    methods:{
+        inputNumberAbsWeight(event) {
+            const input = event.target
+            this.profileData.userWeight = this.profileData.userWeight.replace(/^0+|[^\d.]/g, '');
+            input.value = this.profileData.userWeight
+        },
+        inputNumberAbsHeight(event) {
+            const input = event.target
+            this.profileData.userHeight = this.profileData.userHeight.replace(/^0+|[^\d.]/g, '');
+            input.value = this.profileData.userWeight
+        },
+        inputNumberAbsAge(event){
+            const input = event.target
+            this.profileData.userAge = this.profileData.userAge.replace(/^0+|[^\d.]/g, '');
+            input.value = this.profileData.userAge
+        },
+        emitCreateAccount(){
+
+        }
+    }
 }
 </script>
 
 <style scoped>
+button{
+    border-radius: 30px;
+    border:none;
+    padding:20px;
+    background: deepskyblue;
+    color:white;
+    cursor: pointer;
+}
 
+button:hover{
+    border-radius: 30px;
+    border:none;
+    padding:20px;
+    background: dodgerblue;
+    color:white;
+    cursor: pointer;
+}
 
-input{
-    width: 100%;
-    padding:0 0 30px;
+button:active{
+    border-radius: 30px;
+    border:none;
+    padding:20px;
+    background: royalblue;
+    color:white;
+    cursor: pointer;
+}
+
+.text-input{
+    text-indent: 15px;
+    direction: ltr;
+    color:white;
+    font-size: 20px;
+    width: 25%;
+    padding-top:5px;
+    padding-bottom: 5px;
     border:none;
     border-radius: 30px;
-    background: white;
+    background: dodgerblue;
+}
+
+#slider{
+    width: 100%;
+    margin:5px;
+}
+
+.input-section{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .fullscreen{
