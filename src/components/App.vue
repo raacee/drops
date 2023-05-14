@@ -51,7 +51,7 @@ export default {
             const redInitial = 204
             const redFinal = 79
 
-            const greenInitial = 102
+            const greenInitial = 150
             const greenFinal = 195
 
             const blueInitial = 0
