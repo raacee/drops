@@ -2,7 +2,10 @@
     <div class="main-container">
         <div class="control">
             <p style="font-size:25px;">
-                Welcome back <br><br> Today you have drank {{ totalVolume }} liters of water
+                Welcome back {{ userName }} <br><br> Today you have drank {{ totalVolume }} liters of water
+            </p>
+            <p>
+                Your objective is {{ volumeObjective }} liters per day
             </p>
         </div>
         <div style="color:white">
@@ -68,19 +71,31 @@ export default {
     },
     data() {
         return {
+            userName:"",
             volumeInputText:0,
-            totalVolume: 2.7,
-            volumeObjective:2.7,
-            bottomWave: 0,
-            bottomVolume: 0
+            totalVolume: 0,
+            volumeObjective:0,
         }
     },
     methods:{
         inputNumberAbs() {
             const input = document.getElementsByTagName("input")[0];
             this.volumeInputText = this.volumeInputText.replace(/^0+|[^\d.]/g, '');
-            input.value = input.value.replace(/^0+|[^\d.]/g, '');
+            input.value = this.volumeInputText
         }
+    },
+    beforeMount() {
+        const genderDict = {
+            'Male' : function(weight, height, physicalActivity, age){
+                return 3 + physicalActivity*0.5 + 0.25*age
+            },
+            'Female' : function(weight, height, physicalActivity, age){
+                return 2 + physicalActivity*0.5 + 0.25*age
+            }
+        }
+        const estimateObjective = genderDict[this.profileData.userGender]
+        const {userWeight, userHeight, userPhysicalActivity, userAge} = this.profileData
+        this.volumeObjective = estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)
     }
 }
 
