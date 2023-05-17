@@ -9,7 +9,7 @@
             </div>
             <div style="display: flex; justify-content: center; flex-direction: column; margin:20px;">
                 <div class="input-section">
-                    <p>Gender :</p>
+                    <p style="margin:0;">Gender :</p>
                     <div style="display: flex; justify-content: center; align-items: center">
                         <div>
                             <input type="radio" id="one" value="Male" v-model="this.profileData.userGender" style=""/>
