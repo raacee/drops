@@ -92,7 +92,7 @@ export default {
                 return;
             }
             if(!this.profileData.userAge || this.profileData.userAge === 0){
-                window.alert("Please choose a gender")
+                window.alert("Please enter your age")
                 return;
             }
             if(!this.profileData.userName || this.profileData.userName === ""){
