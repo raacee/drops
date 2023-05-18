@@ -125,9 +125,10 @@ export default {
         const {userWeight, userHeight, userPhysicalActivity, userAge} = this.profileData
         this.volumeObjective = Math.round(estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)*100)/100
 
-        const total = localStorage.getItem('totalVolume')
-        if(total){
-            this.totalVolume = total
+        const date = new Date(localStorage.getItem('lastDate'))
+        const today = new Date()
+        if(today.getDay() !== date.getDay() || date.getMonth() !== today.getMonth()){
+            localStorage.setItem('totalVolume','0')
         }
     }
 }
