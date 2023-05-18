@@ -114,10 +114,10 @@ export default {
     beforeMount() {
         const genderDict = {
             'Male' : function(weight, height, physicalActivity, age){
-                return 3 + physicalActivity*0.15 + 0.05*age
+                return 1.8 + physicalActivity/7*0.1 + 50/age * 0.05 + 70/weight + 175/height
             },
             'Female' : function(weight, height, physicalActivity, age){
-                return 2 + physicalActivity*0.15 + 0.05*age
+                return 1.5 + physicalActivity/7*0.1 + 50/age * 0.05 + 70/weight + 175/height
             }
         }
         const estimateObjective = genderDict[this.profileData.userGender]
