@@ -97,8 +97,17 @@ export default {
             input.value = this.volumeInputText
         },
         addDrink(){
-            this.totalVolume = Math.round((this.totalVolume + (this.volumeInputNumber / 1000))*1000)/1000
+            if(this.volumeObjective < this.totalVolume + this.volumeInputNumber / 1000){
+                this.totalVolume = this.volumeObjective
+                localStorage.setItem('totalVolume', this.volumeObjective)
+                return;
+            }
+
+            this.totalVolume = Math.round((this.totalVolume + (this.volumeInputNumber / 1000))*100)/100
+
             localStorage.setItem('totalVolume', this.totalVolume)
+            this.lastDate = new Date().toISOString()
+            localStorage.setItem('lastDate',this.lastDate.toString())
         }
     },
     beforeMount() {
