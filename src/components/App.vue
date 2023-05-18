@@ -130,6 +130,9 @@ export default {
         if(today.getDay() !== date.getDay() || date.getMonth() !== today.getMonth()){
             localStorage.setItem('totalVolume','0')
         }
+
+        const total = Number(localStorage.getItem('totalVolume'))
+        this.totalVolume = !!total ? total : 0
     }
 }
 
