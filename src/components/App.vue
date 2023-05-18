@@ -123,7 +123,7 @@ export default {
         this.userName = this.profileData.userName;
         const estimateObjective = genderDict[this.profileData.userGender]
         const {userWeight, userHeight, userPhysicalActivity, userAge} = this.profileData
-        this.volumeObjective = Math.round(estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)*1000)/1000
+        this.volumeObjective = Math.round(estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)*100)/100
 
         const total = localStorage.getItem('totalVolume')
         if(total){
