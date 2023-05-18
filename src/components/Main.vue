@@ -1,5 +1,6 @@
 <template>
-  <component :is=this.view @createAccount="accountCreated" :profileData="this.profileData"/>
+  <FirstTime v-if="this.view === 'FirstTime'" @createAccount="accountCreated" />
+  <App v-else :profileData="this.profileData"/>
 </template>
 
 
