@@ -31,11 +31,11 @@
     </div>
 
     <div style="z-index:-9999">
-        <div :style="'position:fixed; bottom:'+(this.bottomOffset-235)+'px;'">
+        <div :style="'position:fixed; bottom:'+this.wavePosition+'px;'" ref="wave" class="">
             <Wave :volumePercentage="this.volumePercentage"/>
         </div>
-        <div class="bottom-fill"
-             :style="'position:fixed; bottom:0; height:'+this.bottomOffset+'px; width:100%; background:rgb('+this.bottomColor+')'">
+        <div ref="water" class="bottom-fill"
+             :style="'position:fixed; bottom:0; height:'+this.waterHeight+'px; width:100%; background:rgb('+this.bottomColor+')'">
         </div>
     </div>
 
@@ -59,8 +59,11 @@ export default {
         volumePercentage(){
             return this.totalVolume/this.volumeObjective
         },
-        bottomOffset(){
+        waterHeight(){
             return this.volumePercentage * 850
+        },
+        wavePosition(){
+            return this.waterHeight-235
         },
         bottomColor(){
             const redInitial = 204
