@@ -120,6 +120,7 @@ export default {
                 return 1.5 + physicalActivity/7*0.1 + 50/age * 0.05 + 70/weight + 175/height
             }
         }
+        this.userName = this.profileData.userName;
         const estimateObjective = genderDict[this.profileData.userGender]
         const {userWeight, userHeight, userPhysicalActivity, userAge} = this.profileData
         this.volumeObjective = Math.round(estimateObjective(userWeight,userHeight,userPhysicalActivity, userAge)*1000)/1000
