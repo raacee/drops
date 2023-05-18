@@ -49,6 +49,15 @@ export default {
     name:'App',
     props:['profileData'],
     components: {Wave},
+    data() {
+        return {
+            userName:"",
+            volumeInputText:0,
+            totalVolume: 0,
+            volumeObjective:0,
+            lastDate:new Date()
+        }
+    },
     computed:{
         volumeInputNumber(){
             if(this.volumeInputText[0]==='.'){
@@ -80,14 +89,6 @@ export default {
                 greenInitial - (greenInitial - greenFinal) * this.volumePercentage,
                 blueInitial - (blueInitial - blueFinal) * this.volumePercentage
             ].join(',')
-        }
-    },
-    data() {
-        return {
-            userName:"",
-            volumeInputText:0,
-            totalVolume: 0,
-            volumeObjective:0,
         }
     },
     methods:{
