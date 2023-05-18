@@ -4,8 +4,14 @@
             <p style="font-size:25px;">
                 Welcome back {{ userName }} <br><br> Today you have drank {{ totalVolume }} liters of water
             </p>
-            <p>
+            <p v-if="this.totalVolume < this.volumeObjective">
                 Your objective is {{ volumeObjective }} liters per day
+            </p>
+            <p v-else >
+                Good Job ! You have reached your objective for today.
+            </p>
+            <p v-if="this.totalVolume < this.volumeObjective">
+                You need {{ Math.round((volumeObjective - totalVolume)*100)/100 }} to complete
             </p>
         </div>
         <div style="color:white">
