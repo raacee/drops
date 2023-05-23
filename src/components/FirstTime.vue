@@ -86,7 +86,6 @@ export default {
             input.value = this.profileData.userAge
         },
         emitCreateAccount(){
-            console.log(this.profileData)
             if(!this.profileData.userGender || this.profileData.userGender === ""){
                 window.alert("Please choose a gender")
                 return;
