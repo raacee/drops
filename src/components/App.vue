@@ -139,6 +139,24 @@ export default {
 </script>
 
 <style>
+@keyframes waveRise {
+    0% {
+        bottom:0
+    }
+    100%{
+        bottom:0
+    }
+}
+
+@keyframes waterRise{
+    0% {
+        height:0
+    }
+    100%{
+        height:0
+    }
+}
+
 .main-container{
     width: 100%;
     display: flex;
